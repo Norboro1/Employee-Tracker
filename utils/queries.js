@@ -147,7 +147,7 @@ const viewEmployeesByDepartment = () => {
         name: 'department_id',
         message: 'What is the department ID of the employees you would like to view?'
     }).then((answer) => {
-        db.query('SELECT * FROM employee WHERE department_id = ?', answer.department_id, function (err, results) {
+        db.query('SELECT employee.id, employee.first_name, employee.last_name, role_id, manager_id FROM employee JOIN role ON employee.role_id = role.id WHERE department_id = ?', answer.department_id, function (err, results) {
             console.table(results);
             start();
         });
